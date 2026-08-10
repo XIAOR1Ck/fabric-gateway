@@ -62,12 +62,10 @@ export class VoteService {
   ): Promise<void> {
     const contract = this.connection.getContract();
 
-    await contract.submitTransaction(
-      'CastVote',
-      electionId,
-      candidateId,
-      proof,
-    );
+    await contract.submit('CastVote', {
+  arguments: [electionId, candidateId, proof],
+  endorsingOrganizations: ['PollingStationMSP', 'ObserverMSP', 'ElectionCommissionMSP'],
+});
   }
 
   async getCandidates(electionId: string): Promise<unknown> {
