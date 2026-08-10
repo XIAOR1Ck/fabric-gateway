@@ -27,6 +27,7 @@ export const authenticateJWT = (
   const token = authHeader.split(' ')[1];
 
   try {
+    console.log("JWT token", token);
     const decoded = jwt.verify(token, env.jwtSecret);
 
     if (typeof decoded === 'string') {
