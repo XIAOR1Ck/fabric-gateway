@@ -1,7 +1,10 @@
 import express from 'express';
-import 'dotenv/config';
 import cors from 'cors';
 import { voteService } from './gateway';
+import 'dotenv/config';
+
+import authRoutes from './routes/auth.routes';
+import voteRoutes from './routes/vote.routes';
 
 const app = express();
 
@@ -15,13 +18,14 @@ credentials: true,
 })
 );
 
-
 app.get("/", (_req, res) => {
   res.json({
   success: true,
   message: "Fabric Gateway API running"
 });
 });
+app.use('/api/auth', authRoutes);
+app.use('/api/votes', voteRoutes);
 
 async function startServer() {
   try {
