@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
-import { VoteService } from '../services/vote.service';
+import { voteService } from '../gateway';
 
-const voteService = new VoteService();
 
 export const createElection = async (
   req: Request,
